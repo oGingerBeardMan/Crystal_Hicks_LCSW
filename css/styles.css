@@ -1269,17 +1269,19 @@ CALL TO ACTION
 
 .cta-content .btn-outline{
 
-    color:white;
+background:white;
 
-    border-color:white;
+border:2px solid var(--sage);
+
+color:var(--sage);
 
 }
 
 .cta-content .btn-outline:hover{
 
-    background:white;
+background:var(--sage);
 
-    color:var(--sage);
+color:white;
 
 }
 
