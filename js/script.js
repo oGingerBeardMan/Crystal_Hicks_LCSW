@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*=========================================
       Contact Form Placeholder
-    =========================================*/
+
 
     const form = document.querySelector(".contact-form form");
 
@@ -209,3 +209,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+    =========================================*/
