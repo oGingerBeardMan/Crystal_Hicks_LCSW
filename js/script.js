@@ -208,5 +208,31 @@ document.addEventListener("DOMContentLoaded", () => {
     
     }
 =========================================*/
+
+
+     /*=========================================
+      Contact Form Confirmation
+    =========================================*/
+const form = document.getElementById("contactForm");
+
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Stop page redirect
+
+        fetch(form.action, {
+            method: "POST",
+            body: new FormData(form)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Thank you for your message. I typically respond within 3 business days. If you're experiencing a crisis or need immediate support, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.");
+            form.reset(); // Clear the form fields
+        })
+        .catch(error => {
+            alert("Oops! There was a problem submitting your form.");
+        });
+    });
+}
+ 
 });
 
