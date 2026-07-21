@@ -2347,17 +2347,17 @@ header.scrolled {
     line-height: 1.2;
 }
 
-.nav-links a[href="#about"]    { order: 1; }
-.nav-links a[href="#contact"]  { order: 2; }
-.nav-links a[href="#focus"]    { order: 3; }
-.nav-links a[href="#faq"]      { order: 4; }
-
-/* "Ways We Can Work Together" spans full-width across bottom */
+/* "Ways We Can Work Together" spans full-width across top */
 .nav-links a[href="#services"] { 
-    order: 5; 
+    order: 1; 
     grid-column: span 2; 
 }
-
+ 
+.nav-links a[href="#focus"]    { order: 2; }
+.nav-links a[href="#about"]    { order: 3; }
+.nav-links a[href="#faq"]      { order: 4; }
+.nav-links a[href="#contact"]  { order: 5; }
+ 
 .nav-links a:hover,
 .nav-links a:active {
     background: var(--sage);
