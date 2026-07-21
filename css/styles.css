@@ -2244,21 +2244,6 @@ General Layout
 }
 
 /*=========================================
-Navigation
-=========================================*/
-.desktop-cta{
-
-    display:none;
-
-}
-
-.mobile-toggle{
-
-    display:flex;
-
-}
-
-/*=========================================
 Navigation (Mobile)
 =========================================*/
 
@@ -2379,7 +2364,7 @@ LOGO
 
 }
 
-@media(max-width:768px){
+@media(max-width:850px){
 
 .logo-name{
 
