@@ -2128,41 +2128,59 @@ SERVICE PRICING
 
 }
 
-.price{
+.price-label{
 
-    width:110px;
-
-    height:110px;
-
-    border-radius:50%;
-
-    background:#F5F4EF;
-
-    border:2px solid rgba(108,129,115,.12);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin:15px auto;
-
-    font-size:2rem;
+    font-size:.72rem;
 
     font-weight:700;
 
-    color:var(--sage);
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:#8A928A;
+
+    margin-bottom:10px;
 
 }
 
-.price-label{
+.price{
 
-    font-size:.95rem;
+    font-size:2.5rem;
 
-    color:#7A817A;
+    font-weight:300;
 
-    letter-spacing:.05em;
+    line-height:1;
+
+    color:var(--sage);
+
+    margin-bottom:22px;
+
+}
+
+.service-link{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    color:var(--sage);
+
+    transition:.3s;
+
+}
+
+.service-link:hover{
+
+    gap:14px;
+
+    color:var(--sage-dark);
 
 }
 /*=========================================================
