@@ -2168,7 +2168,7 @@ SERVICE FOOTER
 
     padding:14px 22px;
 
-    border-radius:0px 0px 999px 999px;
+    border-radius:0 0 999px 999px;
 
     background:var(--sage-dark);
 
