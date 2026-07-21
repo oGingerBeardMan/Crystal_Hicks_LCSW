@@ -2247,7 +2247,7 @@ General Layout
 Navigation (Mobile)
 =========================================*/
 
-/* Force header background to be solid on mobile so page content never bleeds through */
+/* Force header background to be solid on mobile */
 header, 
 header.scrolled {
     background: var(--warm-white) !important;
@@ -2259,58 +2259,61 @@ header.scrolled {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 0 10px;
+    padding: 14px 0;
 }
 
-/* Row 1 Left: Logo */
+/* Line 1 Left: Logo */
 .logo {
     order: 1;
     flex: 0 1 auto;
 }
 
 .logo-name {
-    font-size: 1.1rem;
+    font-size: 1.18rem;
 }
 
 .logo-credentials {
-    font-size: 0.62rem;
+    font-size: 0.65rem;
 }
 
-/* Row 1 Right: Ultra-Compact Consultation Button */
-.navbar > .btn {
-    order: 2;
-    flex: 0 0 auto;
-    padding: 6px 12px;
-    font-size: 0.72rem;
-    letter-spacing: -0.1px;
-    white-space: nowrap;
-    box-shadow: none; /* Sleek, inline fit */
-}
-
-/* Row 2: Centered Hamburger Toggle Button */
+/* Line 1 Right: Hamburger Toggle Button */
 .mobile-toggle {
-    order: 3;
+    order: 2;
     display: flex;
-    flex: 0 0 100%;
-    width: 100%;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    gap: 5px;
+    width: 42px;
+    height: 42px;
     background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
 .mobile-toggle span {
     display: block;
-    width: 28px;
+    width: 26px;
     height: 2px;
     background: var(--charcoal);
     border-radius: 3px;
     transition: .3s;
 }
 
-/* Hidden by default */
+/* Line 2: Full-Width Schedule Consultation Button */
+.navbar > .btn {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Line 3: Solid 2-Column Menu Panel */
 .nav-links {
     display: none;
     order: 4;
@@ -2318,7 +2321,6 @@ header.scrolled {
     width: 100%;
 }
 
-/* Row 3: Solid 2-Column Menu Grid */
 .nav-links.active {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2326,10 +2328,11 @@ header.scrolled {
     width: 100%;
     background: var(--warm-white);
     padding: 16px 0 6px;
-    margin-top: 10px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Style individual grid links */
+/* Link Styles & Reordering */
 .nav-links a {
     display: flex;
     align-items: center;
@@ -2344,13 +2347,12 @@ header.scrolled {
     line-height: 1.2;
 }
 
-/* Reorder links on mobile views only */
 .nav-links a[href="#about"]    { order: 1; }
 .nav-links a[href="#contact"]  { order: 2; }
 .nav-links a[href="#focus"]    { order: 3; }
 .nav-links a[href="#faq"]      { order: 4; }
 
-/* Move "Ways We Can Work Together" to position 5 and span both columns */
+/* "Ways We Can Work Together" spans full-width across bottom */
 .nav-links a[href="#services"] { 
     order: 5; 
     grid-column: span 2; 
@@ -2365,7 +2367,6 @@ header.scrolled {
 .nav-links a::after {
     display: none;
 }
-
  
 /*=========================================================
 LOGO
