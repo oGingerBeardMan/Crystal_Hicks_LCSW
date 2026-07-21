@@ -2130,13 +2130,29 @@ SERVICE PRICING
 
 .price{
 
-    font-size:2.6rem;
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    background:#F5F4EF;
+
+    border:2px solid rgba(108,129,115,.12);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:15px auto;
+
+    font-size:2rem;
 
     font-weight:700;
 
     color:var(--sage);
-
-    margin-bottom:6px;
 
 }
 
