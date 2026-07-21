@@ -2113,5 +2113,48 @@ LANDSCAPE DIVIDER
 }
 
 /*=========================================================
+SERVICE PRICING
+=========================================================*/
+
+.service-price{
+
+    margin-top:auto;
+
+    padding-top:28px;
+
+    border-top:1px solid rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+.price-label{
+
+    display:block;
+
+    font-size:.82rem;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    color:#7d877f;
+
+    margin-bottom:8px;
+
+}
+
+.price{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    color:var(--sage);
+
+    line-height:1;
+
+}
+/*=========================================================
 END OF STYLESHEET
 =========================================================*/
