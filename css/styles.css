@@ -350,21 +350,17 @@ color:var(--charcoal);
 
 }
 
-.logo span{
+.logo-name{
 
-display:block;
+    font-size:1.1rem;
 
-font-family:'Lato';
+}
 
-font-size:.8rem;
+.logo-credentials{
 
-letter-spacing:3px;
+    font-size:.68rem;
 
-text-transform:uppercase;
-
-color:var(--sage);
-
-margin-top:2px;
+    letter-spacing:.18em;
 
 }
 
@@ -1829,11 +1825,17 @@ display:none;
 
 .mobile-toggle{
 
-display:flex;
+    display:none;
 
-cursor:pointer;
+    background:none;
 
-font-size:2rem;
+    border:none;
+
+    font-size:2rem;
+
+    color:var(--charcoal);
+
+    cursor:pointer;
 
 }
 
@@ -2216,7 +2218,29 @@ General Layout
 /*=========================================
 Navigation
 =========================================*/
+@media(max-width:768px){
 
+.mobile-toggle{
+
+    display:block;
+
+}
+
+.nav-links{
+
+    display:none;
+
+}
+
+.nav-links.active{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+}
 .navbar{
 
     background:rgba(252,251,248,.97);
@@ -2231,29 +2255,37 @@ Navigation
 
 }
 
+/*=========================================================
+LOGO
+=========================================================*/
+
 .logo{
 
     display:flex;
 
-    align-items:baseline;
+    flex-direction:column;
 
-    gap:6px;
+    justify-content:center;
 
-    white-space:nowrap;
+    align-items:flex-start;
+
+    text-decoration:none;
+
+    line-height:1.05;
 
 }
 
 .logo-name{
 
-    font-size:1.05rem;
+    font-size:1.1rem;
 
 }
 
 .logo-credentials{
 
-    font-size:.78rem;
+    font-size:.68rem;
 
-    letter-spacing:.08em;
+    letter-spacing:.18em;
 
 }
 
