@@ -2189,6 +2189,307 @@ SERVICE FOOTER
     transform:translateY(-2px);
 
 }
+
+/*=========================================================
+MOBILE OPTIMIZATION
+(Desktop remains unchanged)
+=========================================================*/
+
+@media (max-width:768px){
+
+/*=========================================
+General Layout
+=========================================*/
+
+.section{
+
+    padding:70px 0;
+
+}
+
+.container{
+
+    width:min(94%, 1200px);
+
+}
+
+/*=========================================
+Navigation
+=========================================*/
+
+.navbar{
+
+    background:rgba(252,251,248,.97);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    box-shadow:0 4px 18px rgba(0,0,0,.06);
+
+    padding:14px 0;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:6px;
+
+    white-space:nowrap;
+
+}
+
+.logo-name{
+
+    font-size:1.05rem;
+
+}
+
+.logo-credentials{
+
+    font-size:.78rem;
+
+    letter-spacing:.08em;
+
+}
+
+/*=========================================
+Hero
+=========================================*/
+
+.hero{
+
+    min-height:100svh;
+
+    padding-top:130px;
+
+    text-align:center;
+
+}
+
+.hero h1{
+
+    font-size:2.4rem;
+
+    line-height:1.15;
+
+}
+
+.hero-subtitle{
+
+    font-size:.95rem;
+
+    line-height:1.8;
+
+    margin-bottom:28px;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.hero-buttons .btn{
+
+    width:100%;
+
+}
+
+/*=========================================
+Welcome
+=========================================*/
+
+.welcome{
+
+    grid-template-columns:1fr;
+
+    gap:45px;
+
+}
+
+.welcome-image{
+
+    order:-1;
+
+}
+
+/*=========================================
+Landscape Divider
+=========================================*/
+
+.landscape-divider{
+
+    height:320px;
+
+}
+
+.divider-text{
+
+    text-align:center;
+
+    margin:auto;
+
+}
+
+.divider-text h2{
+
+    font-size:2rem;
+
+}
+
+.divider-text p{
+
+    font-size:1rem;
+
+}
+
+/*=========================================
+Service Cards
+=========================================*/
+
+.services-grid{
+
+    grid-template-columns:1fr;
+
+    gap:28px;
+
+}
+
+.service-card{
+
+    margin:0;
+
+}
+
+.service-footer{
+
+    margin:30px -30px -30px;
+
+    padding:24px 30px 30px;
+
+}
+
+.price{
+
+    font-size:2rem;
+
+}
+
+.service-btn{
+
+    width:100%;
+
+}
+
+/*=========================================
+Areas of Focus
+=========================================*/
+
+.focus-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+/*=========================================
+About
+=========================================*/
+
+.about{
+
+    grid-template-columns:1fr;
+
+    gap:45px;
+
+}
+
+.about-photo{
+
+    max-width:320px;
+
+    margin:auto;
+
+}
+
+.credentials{
+
+    justify-content:center;
+
+}
+
+/*=========================================
+CTA
+=========================================*/
+
+.cta-section{
+
+    min-height:420px;
+
+}
+
+.cta-overlay{
+
+    padding:80px 0;
+
+}
+
+.cta-content h2{
+
+    font-size:2rem;
+
+}
+
+.cta-content p{
+
+    font-size:1rem;
+
+}
+
+.cta-content .hero-buttons{
+
+    flex-direction:column;
+
+}
+
+.cta-content .btn{
+
+    width:100%;
+
+}
+
+/*=========================================
+Contact
+=========================================*/
+
+.contact-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+/*=========================================
+Footer
+=========================================*/
+
+.footer-grid{
+
+    grid-template-columns:1fr;
+
+    gap:40px;
+
+    text-align:center;
+
+}
+
+}
 /*=========================================================
 END OF STYLESHEET
 =========================================================*/
