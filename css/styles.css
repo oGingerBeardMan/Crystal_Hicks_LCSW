@@ -2113,16 +2113,20 @@ LANDSCAPE DIVIDER
 }
 
 /*=========================================================
-SERVICE PRICING
+SERVICE FOOTER
 =========================================================*/
 
-.service-price{
+.service-footer{
 
-    margin-top:auto;
+    margin:30px -36px -36px;
 
-    padding-top:26px;
+    padding:28px 36px 36px;
+
+    background:#E5EEE6;   /* lighter sage */
 
     border-top:1px solid rgba(0,0,0,.08);
+
+    border-radius:0 0 24px 24px;
 
     text-align:center;
 
@@ -2130,15 +2134,15 @@ SERVICE PRICING
 
 .price-label{
 
-    font-size:.72rem;
-
-    font-weight:700;
+    text-transform:uppercase;
 
     letter-spacing:.18em;
 
-    text-transform:uppercase;
+    font-size:.75rem;
 
-    color:#8A928A;
+    color:#6F786F;
+
+    font-weight:700;
 
     margin-bottom:10px;
 
@@ -2146,41 +2150,43 @@ SERVICE PRICING
 
 .price{
 
-    font-size:2.5rem;
+    font-size:2.35rem;
 
     font-weight:300;
 
-    line-height:1;
+    color:var(--sage-dark);
 
-    color:var(--sage);
-
-    margin-bottom:22px;
+    margin-bottom:24px;
 
 }
 
-.service-link{
+.service-btn{
 
-    display:inline-flex;
+    display:inline-block;
 
-    align-items:center;
+    width:100%;
 
-    gap:8px;
+    padding:14px 22px;
+
+    border-radius:999px;
+
+    background:var(--sage-dark);
+
+    color:white;
 
     text-decoration:none;
 
     font-weight:600;
 
-    color:var(--sage);
-
-    transition:.3s;
+    transition:.3s ease;
 
 }
 
-.service-link:hover{
+.service-btn:hover{
 
-    gap:14px;
+    background:var(--sage);
 
-    color:var(--sage-dark);
+    transform:translateY(-2px);
 
 }
 /*=========================================================
