@@ -1833,15 +1833,37 @@ display:none;
 
     display:none;
 
+    flex-direction:column;
+
+    justify-content:center;
+
+    gap:5px;
+
+    width:42px;
+
+    height:42px;
+
     background:none;
 
     border:none;
 
-    font-size:2rem;
-
-    color:var(--charcoal);
-
     cursor:pointer;
+
+}
+
+.mobile-toggle span{
+
+    display:block;
+
+    width:28px;
+
+    height:2px;
+
+    background:var(--charcoal);
+
+    border-radius:3px;
+
+    transition:.3s;
 
 }
 
@@ -2224,8 +2246,6 @@ General Layout
 /*=========================================
 Navigation
 =========================================*/
-@media(max-width:768px){
-
 .desktop-cta{
 
     display:none;
@@ -2259,7 +2279,6 @@ Navigation
     flex-direction:column;
 
 }
-
 /*=========================================================
 LOGO
 =========================================================*/
