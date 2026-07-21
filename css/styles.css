@@ -2276,13 +2276,15 @@ header.scrolled {
     font-size: 0.62rem;
 }
 
-/* Row 1 Right: Compact Schedule Consultation Button */
+/* Row 1 Right: Ultra-Compact Consultation Button */
 .navbar > .btn {
     order: 2;
     flex: 0 0 auto;
-    padding: 8px 14px;
-    font-size: 0.78rem;
-    white-space: nowrap; /* Prevents button text from wrapping */
+    padding: 6px 12px;
+    font-size: 0.72rem;
+    letter-spacing: -0.1px;
+    white-space: nowrap;
+    box-shadow: none; /* Sleek, inline fit */
 }
 
 /* Row 2: Centered Hamburger Toggle Button */
