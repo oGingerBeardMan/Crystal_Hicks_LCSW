@@ -236,16 +236,26 @@ if (form) {
  
 });
 
-     /*=========================================
-      Mobile Navbar
-    =========================================*/
+/*=========================================
+  Mobile Navbar
+=========================================*/
 
 const mobileToggle = document.querySelector(".mobile-toggle");
 const navLinks = document.querySelector(".nav-links");
 
-mobileToggle.addEventListener("click", () => {
+if (mobileToggle && navLinks) {
+    // Toggle menu open/close
+    mobileToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
 
-    navLinks.classList.toggle("active");
+    // Close menu when any menu link is clicked
+    document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+            navLinks.classList.remove("active");
+        });
+    });
+}
 
 });
 
