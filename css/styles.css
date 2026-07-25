@@ -2651,8 +2651,11 @@ Footer
 
 /* Sub-page Hero Section */
 .page-hero {
-    padding-top: 170px;
-    padding-bottom: 90px;
+    padding-top:180px;
+    padding-bottom:130px;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
     background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
     position: relative;
 }
