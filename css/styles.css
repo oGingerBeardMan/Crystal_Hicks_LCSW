@@ -2959,6 +2959,11 @@ Footer
     font-size: 0.88rem;
 }
 
+/* Ensure smooth offset for scrolling to cards */
+.service-detail-card {
+    scroll-margin-top: 100px; /* Adjust based on navbar height */
+}
+
 /* Mobile Responsiveness for Sub-page components */
 @media (max-width: 768px) {
     .page-hero-content h1 {
