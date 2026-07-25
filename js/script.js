@@ -261,30 +261,64 @@ if (mobileToggle && navLinks) {
   Service Card Expansion
 =========================================*/
 
-const serviceCards = document.querySelectorAll(".service-detail-card");
+document.addEventListener('DOMContentLoaded', () => {
 
-document.querySelectorAll(".service-toggle").forEach(button => {
+    // Helper function to scroll smoothly to a card with fixed-header offset
+    function scrollToCard(cardElement) {
+        // Adjust headerOffset to match your fixed navbar height + breathing room
+        const headerOffset = 100; 
+        const elementPosition = cardElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    button.addEventListener("click", () => {
-
-        const card = button.closest(".service-detail-card");
-
-        // Close every other card
-        serviceCards.forEach(c => {
-
-            if (c !== card) {
-
-                c.classList.remove("open");
-
-            }
-
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
         });
+    }
 
-        // Toggle the selected card
-        card.classList.toggle("open");
+    // Handle Card Expansion on Click
+    const serviceToggles = document.querySelectorAll('.service-toggle');
 
+    serviceToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            const currentCard = toggle.closest('.service-detail-card');
+            const isOpen = currentCard.classList.contains('open');
+
+            // Optional: Close other open cards (accordion style). 
+            // Comment out the next 3 lines if you want multiple cards open at once.
+            document.querySelectorAll('.service-detail-card.open').forEach(card => {
+                if (card !== currentCard) card.classList.remove('open');
+            });
+
+            // Toggle current card
+            currentCard.classList.toggle('open');
+
+            // If the card was opened, scroll to the top of it
+            if (!isOpen) {
+                // Brief delay ensures DOM height re-render before scrolling
+                setTimeout(() => {
+                    scrollToCard(currentCard);
+                }, 100);
+            }
+        });
     });
 
+    // Handle Direct Links / Hashes (e.g., coming from homepage with #50-minute)
+    function handleInitialHash() {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetCard = document.querySelector(hash);
+            if (targetCard && targetCard.classList.contains('service-detail-card')) {
+                targetCard.classList.add('open');
+                setTimeout(() => {
+                    scrollToCard(targetCard);
+                }, 200);
+            }
+        }
+    }
+
+    handleInitialHash();
+    window.addEventListener('hashchange', handleInitialHash);
 });
 
 /*=========================================
