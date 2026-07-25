@@ -3001,6 +3001,101 @@ CSS
     border-radius: 4px;
     margin-bottom: 12px;
 }
+
+/*=========================================================
+ FAQ PAGE SPECIFIC STYLES (faq.html)
+=========================================================*/
+
+/* FAQ Category Quick Navigation Bar */
+.faq-nav-section {
+    background: var(--cream);
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(116, 139, 122, 0.15);
+    position: sticky;
+    top: 80px; /* Sits directly below standard navbar */
+    z-index: 90;
+}
+
+.faq-category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.faq-nav-link {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: var(--warm-white);
+    border: 1px solid rgba(116, 139, 122, 0.2);
+    transition: var(--transition);
+}
+
+.faq-nav-link:hover {
+    background: var(--sage);
+    color: white;
+    border-color: var(--sage);
+}
+
+/* Category Sections & Scroll Offset */
+.faq-category-block {
+    margin-bottom: 60px;
+    scroll-margin-top: 150px; /* Offsets scroll so headers aren't hidden by sticky nav */
+}
+
+.section-header.align-left {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.section-header.align-left h2 {
+    font-size: 2.2rem;
+}
+
+/* Inline Links & Crisis Box */
+.inline-link {
+    color: var(--sage-dark);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.crisis-box {
+    background: rgba(184, 91, 75, 0.08); /* Warm accent alert tint */
+    border-left: 4px solid #B85B4B;
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    margin-top: 10px;
+}
+
+.crisis-box p {
+    margin-bottom: 8px;
+    color: var(--charcoal);
+}
+
+.crisis-box .small-note {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 0;
+}
+
+/* Mobile Responsive Adjustments for FAQ */
+@media (max-width: 768px) {
+    .faq-nav-section {
+        position: relative;
+        top: 0;
+    }
+    
+    .faq-category-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 6px;
+    }
+}
+
 /*=========================================================
 END OF STYLESHEET
 =========================================================*/
