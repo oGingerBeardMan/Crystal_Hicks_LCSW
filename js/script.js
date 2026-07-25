@@ -256,3 +256,67 @@ if (mobileToggle && navLinks) {
         });
     });
 }
+
+/*=========================================
+  Service Card Expansion
+=========================================*/
+
+const serviceCards = document.querySelectorAll(".service-detail-card");
+
+document.querySelectorAll(".service-toggle").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const card = button.closest(".service-detail-card");
+
+        // Close every other card
+        serviceCards.forEach(c => {
+
+            if (c !== card) {
+
+                c.classList.remove("open");
+
+            }
+
+        });
+
+        // Toggle the selected card
+        card.classList.toggle("open");
+
+    });
+
+});
+
+/*=========================================
+  Sub-Page Navigate by ID #
+=========================================*/
+
+window.addEventListener("load", () => {
+
+    if (!window.location.hash) return;
+
+    const id = window.location.hash.substring(1);
+
+    const card = document.getElementById(id);
+
+    if (!card) return;
+
+    // Open the matching card
+    card.classList.add("open");
+
+    // Wait for layout, then scroll smoothly
+    setTimeout(() => {
+
+        card.scrollIntoView({
+
+            behavior: "smooth",
+            block: "start"
+
+        });
+
+    }, 200);
+
+});
+
+history.replaceState(null, "", "#" + button.dataset.target);
+card.classList.toggle("open");
