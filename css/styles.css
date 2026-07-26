@@ -2977,7 +2977,7 @@ Footer
 
 /* Ensure smooth offset for scrolling to cards */
 .service-detail-card {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 170px;
 }
 
 /* Mobile Responsiveness for Sub-page components */
