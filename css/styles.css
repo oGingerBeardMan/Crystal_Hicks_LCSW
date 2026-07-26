@@ -1270,7 +1270,39 @@ CALL TO ACTION
 }
 
 
+/*=========================================================
+ CONTACT FORM CRISIS DISCLAIMER
+=========================================================*/
 
+.contact-crisis-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(116, 139, 122, 0.08); /* Soft sage tint */
+    border-left: 3px solid var(--sage);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.contact-crisis-note p {
+    margin: 0;
+}
+
+.contact-crisis-note strong {
+    color: var(--sage-dark);
+}
+
+.contact-crisis-note a {
+    color: var(--sage-dark);
+    font-weight: 600;
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.contact-crisis-note a:hover {
+    color: var(--sage);
+}
 
 
 /*=========================================================
