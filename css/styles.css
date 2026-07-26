@@ -3112,5 +3112,44 @@ Footer
 }
 
 /*=========================================================
+ BRAND MOTIF SERVICE ICON (Option 3)
+=========================================================*/
+
+.service-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px; /* Soft rounded squircle matching card system */
+    background: var(--warm-white);
+    border: 1px solid rgba(116, 139, 122, 0.25);
+    color: var(--sage);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.service-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    transition: transform 0.35s ease;
+}
+
+/* Hover Interaction */
+.service-detail-card:hover .service-icon {
+    background: var(--sage);
+    color: var(--white);
+    border-color: var(--sage);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.service-detail-card:hover .service-icon svg {
+    transform: scale(1.08);
+}
+
+/*=========================================================
 END OF STYLESHEET
 =========================================================*/
