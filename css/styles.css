@@ -2667,11 +2667,11 @@ Footer
 
 /* Sub-page Hero Section */
 .page-hero {
-    padding-top:180px;
-    padding-bottom:130px;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
+    padding-top: 140px;
+    padding-bottom: 50px;
+    min-height: auto;
+    display: flex;
+    align-items: center;
     background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
     position: relative;
 }
@@ -3027,7 +3027,7 @@ Footer
     padding: 20px 0;
     border-bottom: 1px solid rgba(116, 139, 122, 0.15);
     position: sticky;
-    top: 80px;
+    top: 96px;
     z-index: 90;
 }
 
