@@ -354,3 +354,44 @@ window.addEventListener("load", () => {
 
 history.replaceState(null, "", "#" + button.dataset.target);
 card.classList.toggle("open");
+
+// =========================================
+// GOOD FAITH ESTIMATE MODAL FUNCTIONALITY
+// =========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('gfe-modal');
+    const triggers = document.querySelectorAll('.gfe-trigger');
+    const closeButtons = document.querySelectorAll('[data-close-modal]');
+
+    if (!modal) return;
+
+    function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden'; // Prevents background scroll
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = ''; // Restores background scroll
+    }
+
+    // Attach click listener to any link with .gfe-trigger
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', openModal);
+    });
+
+    // Close when clicking overlay or close button
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    // Close when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+});
