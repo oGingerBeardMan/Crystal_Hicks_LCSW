@@ -2332,7 +2332,7 @@ header.scrolled {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* Link Styles & Reordering */
+/* Link Styles & Universal Mobile Reordering */
 .nav-links a {
     display: flex;
     align-items: center;
@@ -2348,15 +2348,31 @@ header.scrolled {
 }
 
 /* "Ways We Can Work Together" spans full-width across top */
-.nav-links a[href="#services"] { 
+.nav-links a[href*="ways_we_can_work_together"] { 
     order: 1; 
     grid-column: span 2; 
 }
- 
-.nav-links a[href="#focus"]    { order: 2; }
-.nav-links a[href="#about"]    { order: 3; }
-.nav-links a[href="#faq"]      { order: 4; }
-.nav-links a[href="#contact"]  { order: 5; }
+
+/* When on "Ways We Can Work Together" page, "Home" replaces it as the full-width top item */
+.nav-links:not(:has(a[href*="ways_we_can_work_together"])) a[href="index.html"],
+.nav-links:not(:has(a[href*="ways_we_can_work_together"])) a[href="./"],
+.nav-links:not(:has(a[href*="ways_we_can_work_together"])) a[href="/"] {
+    order: 1;
+    grid-column: span 2;
+}
+
+/* Grid layout ordering for standard items */
+.nav-links a[href*="focus"]    { order: 2; }
+.nav-links a[href*="about"]    { order: 3; }
+.nav-links a[href*="faq"]      { order: 4; }
+.nav-links a[href*="contact"]  { order: 5; }
+
+/* When "Home" is in the 2x2 grid (e.g., on faq.html where Home replaces FAQ) */
+.nav-links:has(a[href*="ways_we_can_work_together"]) a[href="index.html"],
+.nav-links:has(a[href*="ways_we_can_work_together"]) a[href="./"],
+.nav-links:has(a[href*="ways_we_can_work_together"]) a[href="/"] {
+    order: 4;
+}
  
 .nav-links a:hover,
 .nav-links a:active {
@@ -2961,7 +2977,7 @@ Footer
 
 /* Ensure smooth offset for scrolling to cards */
 .service-detail-card {
-    scroll-margin-top: 100px; /* Adjust based on navbar height */
+    scroll-margin-top: 100px;
 }
 
 /* Mobile Responsiveness for Sub-page components */
@@ -2988,7 +3004,6 @@ Footer
     }
 }
 
-CSS
 .day-badge {
     display: inline-block;
     background: var(--sage-dark);
@@ -3012,7 +3027,7 @@ CSS
     padding: 20px 0;
     border-bottom: 1px solid rgba(116, 139, 122, 0.15);
     position: sticky;
-    top: 80px; /* Sits directly below standard navbar */
+    top: 80px;
     z-index: 90;
 }
 
@@ -3043,7 +3058,7 @@ CSS
 /* Category Sections & Scroll Offset */
 .faq-category-block {
     margin-bottom: 60px;
-    scroll-margin-top: 150px; /* Offsets scroll so headers aren't hidden by sticky nav */
+    scroll-margin-top: 150px;
 }
 
 .section-header.align-left {
@@ -3063,7 +3078,7 @@ CSS
 }
 
 .crisis-box {
-    background: rgba(184, 91, 75, 0.08); /* Warm accent alert tint */
+    background: rgba(184, 91, 75, 0.08);
     border-left: 4px solid #B85B4B;
     padding: 16px 20px;
     border-radius: var(--radius-sm);
