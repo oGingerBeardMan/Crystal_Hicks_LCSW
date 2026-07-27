@@ -3292,6 +3292,128 @@ Footer
 .modal-content a:hover {
     color: var(--sage);
 }
+
+
+/*=========================================
+  How to Choose Section - Image Cards
+=========================================*/
+.choose-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.choose-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2.5rem 2rem;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Background Images per Theme */
+.choose-card-weekly {
+    background-image: url('../images/session50.jpg');
+}
+
+.choose-card-intensive {
+    background-image: url('../images/intensive1.jpg');
+}
+
+/* Dark Gradient Overlay for High Contrast & Text Legibility */
+.choose-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 25, 22, 0.25) 0%,
+        rgba(20, 25, 22, 0.75) 55%,
+        rgba(20, 25, 22, 0.92) 100%
+    );
+    transition: opacity 0.35s ease;
+    z-index: 1;
+}
+
+.choose-card-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+}
+
+.choose-card h3 {
+    color: #ffffff;
+    font-size: 1.65rem;
+    margin-bottom: 0.5rem;
+}
+
+.choose-lead {
+    color: #f0ebe1;
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+    font-style: italic;
+}
+
+.choose-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.choose-list li {
+    color: #e8e3d8;
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+}
+
+.choose-list strong {
+    color: #ffffff;
+}
+
+/* Button style for dark background cards */
+.btn-outline-light {
+    display: inline-block;
+    border: 1.5px solid rgba(255, 255, 255, 0.85);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #2c3e35; /* Primary brand dark color */
+    border-color: #ffffff;
+}
+
+/* Hover Effect */
+.choose-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+.choose-card:hover .choose-card-overlay {
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 25, 22, 0.20) 0%,
+        rgba(20, 25, 22, 0.70) 50%,
+        rgba(20, 25, 22, 0.95) 100%
+    );
+}
+
 /*=========================================================
 END OF STYLESHEET
 =========================================================*/
