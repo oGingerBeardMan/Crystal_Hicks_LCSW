@@ -3009,7 +3009,7 @@ Footer
 
 /* Ensure smooth offset for scrolling to cards */
 .service-detail-card {
-    scroll-margin-top: 190px;
+    scroll-margin-top: 150px;
 }
 
 /* Mobile Responsiveness for Sub-page components */
@@ -3090,7 +3090,7 @@ Footer
 /* Category Sections & Scroll Offset */
 .faq-category-block {
     margin-bottom: 60px;
-    scroll-margin-top: 190px;
+    scroll-margin-top: 150px;
 }
 
 .section-header.align-left {
