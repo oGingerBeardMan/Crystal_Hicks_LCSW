@@ -26,36 +26,47 @@ document.addEventListener("DOMContentLoaded", () => {
     /*=========================================
       Smooth Scrolling
     =========================================*/
-    document.querySelectorAll('a[href^="#"]').forEach(link => {
-        link.addEventListener("click", function (e) {
-            const targetID = this.getAttribute("href");
-
-            // Ignore blank hashes, modal links, or trigger elements
-            if (
-                targetID === "#" ||
-                targetID === "#gfe-modal" ||
-                this.classList.contains("gfe-trigger")
-            ) {
-                return;
-            }
-
-            const target = document.querySelector(targetID);
-            if (!target || target.classList.contains("modal")) return;
-
-            e.preventDefault();
-
-            const headerHeight = header ? header.offsetHeight : 0;
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.pageYOffset -
-                headerHeight;
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth"
-            });
-        });
-    });
+     document.querySelectorAll('a[href^="#"]').forEach(link => {
+         link.addEventListener("click", function (e) {
+             const targetID = this.getAttribute("href");
+     
+             // Ignore blank hashes, modal links, or trigger elements
+             if (
+                 targetID === "#" ||
+                 targetID === "#gfe-modal" ||
+                 this.classList.contains("gfe-trigger")
+             ) {
+                 return;
+             }
+     
+             const target = document.querySelector(targetID);
+             if (!target || target.classList.contains("modal")) return;
+     
+             e.preventDefault();
+     
+             // 1. Get header height
+             const headerHeight = header ? header.offsetHeight : 0;
+     
+             // 2. Read CSS scroll-margin-top (if defined)
+             const style = window.getComputedStyle(target);
+             const scrollMargin = parseInt(style.scrollMarginTop, 10) || 0;
+     
+             // 3. Extra breathing room under the header (in pixels)
+             const extraBuffer = 24; 
+     
+             const targetPosition =
+                 target.getBoundingClientRect().top +
+                 window.pageYOffset -
+                 headerHeight -
+                 scrollMargin -
+                 extraBuffer;
+     
+             window.scrollTo({
+                 top: targetPosition,
+                 behavior: "smooth"
+             });
+         });
+     });
 
 
     /*=========================================
