@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
              const scrollMargin = parseInt(style.scrollMarginTop, 10) || 0;
      
              // 3. Extra breathing room under the header (in pixels)
-             const extraBuffer = 5; 
+             const extraBuffer = 0; 
      
              const targetPosition =
                  target.getBoundingClientRect().top +
