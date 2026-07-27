@@ -8,389 +8,273 @@ document.addEventListener("DOMContentLoaded", () => {
     /*=========================================
       Sticky Navigation
     =========================================*/
-
     const header = document.getElementById("header");
 
     function updateHeader() {
-
+        if (!header) return;
         if (window.scrollY > 40) {
             header.classList.add("scrolled");
         } else {
             header.classList.remove("scrolled");
         }
-
     }
 
     updateHeader();
-
     window.addEventListener("scroll", updateHeader);
-
 
 
     /*=========================================
       Smooth Scrolling
     =========================================*/
-
     document.querySelectorAll('a[href^="#"]').forEach(link => {
-
         link.addEventListener("click", function (e) {
-
             const targetID = this.getAttribute("href");
 
-            if (targetID === "#") return;
+            // Ignore blank hashes, modal links, or trigger elements
+            if (
+                targetID === "#" ||
+                targetID === "#gfe-modal" ||
+                this.classList.contains("gfe-trigger")
+            ) {
+                return;
+            }
 
             const target = document.querySelector(targetID);
-
-            if (!target) return;
+            if (!target || target.classList.contains("modal")) return;
 
             e.preventDefault();
 
-            const headerHeight = header.offsetHeight;
-
+            const headerHeight = header ? header.offsetHeight : 0;
             const targetPosition =
                 target.getBoundingClientRect().top +
                 window.pageYOffset -
                 headerHeight;
 
             window.scrollTo({
-
                 top: targetPosition,
-
                 behavior: "smooth"
-
             });
-
         });
-
     });
-
 
 
     /*=========================================
       FAQ Accordion
     =========================================*/
-
     const faqItems = document.querySelectorAll(".faq-item");
 
     faqItems.forEach(item => {
-
         const question = item.querySelector(".faq-question");
+        if (!question) return;
 
         question.addEventListener("click", () => {
-
             faqItems.forEach(other => {
-
                 if (other !== item) {
-
                     other.classList.remove("active");
-
                 }
-
             });
-
             item.classList.toggle("active");
-
         });
-
     });
-
 
 
     /*=========================================
       Scroll Reveal Animation
     =========================================*/
-
     const animatedElements = document.querySelectorAll(
-
         ".fade-up, .fade-left, .fade-right"
-
     );
 
-    const observer = new IntersectionObserver(
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15 }
+        );
 
-        entries => {
+        animatedElements.forEach(element => observer.observe(element));
+    } else {
+        // Fallback for older browsers
+        animatedElements.forEach(element => element.classList.add("visible"));
+    }
 
-            entries.forEach(entry => {
 
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("visible");
-
-                    observer.unobserve(entry.target);
-
-                }
-
+    /*=========================================
+      Hover Effects
+    =========================================*/
+    const addHoverEffect = (selector, offsetY) => {
+        document.querySelectorAll(selector).forEach(card => {
+            card.addEventListener("mouseenter", () => {
+                card.style.transform = `translateY(${offsetY}px)`;
             });
+            card.addEventListener("mouseleave", () => {
+                card.style.transform = "";
+            });
+        });
+    };
 
-        },
-
-        {
-
-            threshold: 0.15
-
-        }
-
-    );
-
-    animatedElements.forEach(element => {
-
-        observer.observe(element);
-
-    });
-
+    addHoverEffect(".service-card", -12);
+    addHoverEffect(".focus-card", -10);
 
 
     /*=========================================
-      Service Card Hover Enhancement
+      Contact Form AJAX Handling
     =========================================*/
-
-    const serviceCards = document.querySelectorAll(".service-card");
-
-    serviceCards.forEach(card => {
-
-        card.addEventListener("mouseenter", () => {
-
-            card.style.transform = "translateY(-12px)";
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.transform = "";
-
-        });
-
-    });
-
-
-
-    /*=========================================
-      Focus Card Hover Enhancement
-    =========================================*/
-
-    const focusCards = document.querySelectorAll(".focus-card");
-
-    focusCards.forEach(card => {
-
-        card.addEventListener("mouseenter", () => {
-
-            card.style.transform = "translateY(-10px)";
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.transform = "";
-
-        });
-
-    });
-
-
-
-    /*=========================================
-      Contact Form Placeholder
-
-
-    const form = document.querySelector(".contact-form form");
+    const form = document.getElementById("contactForm") || document.querySelector("form[action*='formsubmit']");
 
     if (form) {
-
         form.addEventListener("submit", function (e) {
-
             e.preventDefault();
 
-            alert(
-                "Thank you for reaching out! This demo form isn't connected yet. We'll connect it to your website's contact system later."
-            );
+            const submitBtn = form.querySelector("button[type='submit']");
+            const originalBtnText = submitBtn ? submitBtn.innerText : "Send Inquiry";
 
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Sending...";
+            }
+
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Thank you for your message. I typically respond within 3 business days. If you're experiencing a crisis or need immediate support, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.");
+                    form.reset();
+                } else {
+                    alert("Oops! There was a problem submitting your form. Please try again.");
+                }
+            })
+            .catch(() => {
+                alert("Oops! There was a network problem submitting your form. Please try again.");
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = originalBtnText;
+                }
+            });
         });
-    
     }
-=========================================*/
 
 
-     /*=========================================
-      Contact Form Confirmation
+    /*=========================================
+      Mobile Navigation Toggle
     =========================================*/
-const form = document.getElementById("contactForm");
+    const mobileToggle = document.querySelector(".mobile-toggle");
+    const navLinks = document.querySelector(".nav-links");
 
-if (form) {
-    form.addEventListener("submit", function (e) {
-        e.preventDefault(); // Stop page redirect
-
-        fetch(form.action, {
-            method: "POST",
-            body: new FormData(form)
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert("Thank you for your message. I typically respond within 3 business days. If you're experiencing a crisis or need immediate support, please call or text 988 (Suicide & Crisis Lifeline) or go to your nearest emergency room.");
-            form.reset(); // Clear the form fields
-        })
-        .catch(error => {
-            alert("Oops! There was a problem submitting your form.");
+    if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
         });
-    });
-}
- 
-});
 
-/*=========================================
-  Mobile Navbar
-=========================================*/
-
-const mobileToggle = document.querySelector(".mobile-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-if (mobileToggle && navLinks) {
-    // Toggle menu open/close
-    mobileToggle.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-    });
-
-    // Close menu when any menu link is clicked
-    document.querySelectorAll(".nav-links a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
         });
-    });
-}
+    }
 
-/*=========================================
-  Service Card Expansion
-=========================================*/
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Helper function to scroll smoothly to a card with fixed-header offset
+    /*=========================================
+      Service Detail Accordions / Sub-Pages
+    =========================================*/
     function scrollToCard(cardElement) {
-        // Adjust headerOffset to match your fixed navbar height + breathing room
-        const headerOffset = 100; 
+        const headerOffset = 100;
         const elementPosition = cardElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: "smooth"
         });
     }
 
-    // Handle Card Expansion on Click
-    const serviceToggles = document.querySelectorAll('.service-toggle');
-
+    const serviceToggles = document.querySelectorAll(".service-toggle");
     serviceToggles.forEach(toggle => {
-        toggle.addEventListener('click', (e) => {
-            const currentCard = toggle.closest('.service-detail-card');
-            const isOpen = currentCard.classList.contains('open');
+        toggle.addEventListener("click", () => {
+            const currentCard = toggle.closest(".service-detail-card");
+            if (!currentCard) return;
 
-            // Optional: Close other open cards (accordion style). 
-            // Comment out the next 3 lines if you want multiple cards open at once.
-            document.querySelectorAll('.service-detail-card.open').forEach(card => {
-                if (card !== currentCard) card.classList.remove('open');
+            const isOpen = currentCard.classList.contains("open");
+
+            document.querySelectorAll(".service-detail-card.open").forEach(card => {
+                if (card !== currentCard) card.classList.remove("open");
             });
 
-            // Toggle current card
-            currentCard.classList.toggle('open');
+            currentCard.classList.toggle("open");
 
-            // If the card was opened, scroll to the top of it
             if (!isOpen) {
-                // Brief delay ensures DOM height re-render before scrolling
-                setTimeout(() => {
-                    scrollToCard(currentCard);
-                }, 100);
+                setTimeout(() => scrollToCard(currentCard), 100);
             }
         });
     });
 
-    // Handle Direct Links / Hashes (e.g., coming from homepage with #50-minute)
+
+    /*=========================================
+      Hash Navigation Handling
+    =========================================*/
     function handleInitialHash() {
         const hash = window.location.hash;
-        if (hash) {
+        if (hash && hash !== "#gfe-modal") {
             const targetCard = document.querySelector(hash);
-            if (targetCard && targetCard.classList.contains('service-detail-card')) {
-                targetCard.classList.add('open');
-                setTimeout(() => {
-                    scrollToCard(targetCard);
-                }, 200);
+            if (targetCard && targetCard.classList.contains("service-detail-card")) {
+                targetCard.classList.add("open");
+                setTimeout(() => scrollToCard(targetCard), 200);
             }
         }
     }
 
     handleInitialHash();
-    window.addEventListener('hashchange', handleInitialHash);
-});
+    window.addEventListener("hashchange", handleInitialHash);
 
-/*=========================================
-  Sub-Page Navigate by ID #
-=========================================*/
 
-window.addEventListener("load", () => {
+    /*=========================================
+      Good Faith Estimate Modal Trigger
+    =========================================*/
+    document.addEventListener("click", e => {
+        const trigger = e.target.closest(".gfe-trigger, a[href='#gfe-modal']");
 
-    if (!window.location.hash) return;
-
-    const id = window.location.hash.substring(1);
-
-    const card = document.getElementById(id);
-
-    if (!card) return;
-
-    // Open the matching card
-    card.classList.add("open");
-
-    // Wait for layout, then scroll smoothly
-    setTimeout(() => {
-
-        card.scrollIntoView({
-
-            behavior: "smooth",
-            block: "start"
-
-        });
-
-    }, 200);
-
-});
-
-history.replaceState(null, "", "#" + button.dataset.target);
-card.classList.toggle("open");
-
-// =========================================
-// GOOD FAITH ESTIMATE MODAL (Event Delegation)
-// =========================================
-document.addEventListener('click', (e) => {
-    // Check if the clicked element (or its wrapper) is a GFE trigger
-    const trigger = e.target.closest('.gfe-trigger, a[href="#gfe-modal"]');
-    
-    if (trigger) {
-        e.preventDefault(); // Stops page jump
-        const modal = document.getElementById('gfe-modal');
-        if (modal) {
-            modal.classList.add('active');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; // Lock scrolling
+        if (trigger) {
+            e.preventDefault();
+            const modal = document.getElementById("gfe-modal");
+            if (modal) {
+                modal.classList.add("active");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            }
         }
-    }
 
-    // Check if clicking close button or background overlay
-    if (e.target.closest('[data-close-modal]')) {
-        const modal = document.getElementById('gfe-modal');
-        if (modal) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restore scrolling
+        if (e.target.closest("[data-close-modal]")) {
+            const modal = document.getElementById("gfe-modal");
+            if (modal) {
+                modal.classList.remove("active");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
         }
-    }
-});
+    });
 
-// Close modal on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const modal = document.getElementById('gfe-modal');
-        if (modal && modal.classList.contains('active')) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") {
+            const modal = document.getElementById("gfe-modal");
+            if (modal && modal.classList.contains("active")) {
+                modal.classList.remove("active");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
         }
-    }
+    });
+
 });
