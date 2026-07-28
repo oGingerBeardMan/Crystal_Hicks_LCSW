@@ -251,13 +251,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("hashchange", handleInitialHash);
 
 
-    /*=========================================
-      Good Faith Estimate Modal Trigger
+/*=========================================
+      Modal Controller (GFE & Privacy Policy)
     =========================================*/
     document.addEventListener("click", e => {
-        const trigger = e.target.closest(".gfe-trigger, a[href='#gfe-modal']");
-
-        if (trigger) {
+        // 1. Open GFE Modal
+        const gfeTrigger = e.target.closest(".gfe-trigger, a[href='#gfe-modal']");
+        if (gfeTrigger) {
             e.preventDefault();
             const modal = document.getElementById("gfe-modal");
             if (modal) {
@@ -267,22 +267,38 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        if (e.target.closest("[data-close-modal]")) {
-            const modal = document.getElementById("gfe-modal");
+        // 2. Open Privacy Policy Modal
+        const privacyTrigger = e.target.closest(".privacy-trigger, a[href='#privacy-modal']");
+        if (privacyTrigger) {
+            e.preventDefault();
+            const modal = document.getElementById("privacy-modal");
             if (modal) {
+                modal.classList.add("active");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            }
+        }
+
+        // 3. Close Any Active Modal (Overlay click or Close button)
+        if (e.target.closest("[data-close-modal]")) {
+            const activeModals = document.querySelectorAll(".modal.active");
+            activeModals.forEach(modal => {
                 modal.classList.remove("active");
                 modal.setAttribute("aria-hidden", "true");
-                document.body.style.overflow = "";
-            }
+            });
+            document.body.style.overflow = "";
         }
     });
 
+    // 4. Close Active Modal on Escape Key
     document.addEventListener("keydown", e => {
         if (e.key === "Escape") {
-            const modal = document.getElementById("gfe-modal");
-            if (modal && modal.classList.contains("active")) {
-                modal.classList.remove("active");
-                modal.setAttribute("aria-hidden", "true");
+            const activeModals = document.querySelectorAll(".modal.active");
+            if (activeModals.length > 0) {
+                activeModals.forEach(modal => {
+                    modal.classList.remove("active");
+                    modal.setAttribute("aria-hidden", "true");
+                });
                 document.body.style.overflow = "";
             }
         }
