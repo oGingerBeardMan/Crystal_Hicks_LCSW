@@ -20,19 +20,22 @@ CSS Variables
 
 /* Brand Colors */
 
---sage:#748B7A;
+/* NOTE: darkened from the original design (#748B7A / #5D7263 / #6E7772 / #B59A62)
+   for WCAG 1.4.3 AA contrast (4.5:1) against --warm-white / --cream / white button fills.
+   --sage-light is unchanged since it's only used decoratively, never for text. */
+--sage:#61746A;
 --sage-light:#A7B5AB;
---sage-dark:#5D7263;
+--sage-dark:#4C5E52;
 
 --cream:#F8F6F2;
 --warm-white:#FCFBF8;
 --taupe:#C9B8A6;
 --charcoal:#3E4844;
 
---gold:#B59A62;
+--gold:#7E6B44;
 
 --text:#48504C;
---text-light:#6E7772;
+--text-light:#636B66;
 
 --white:#FFFFFF;
 
@@ -1562,11 +1565,44 @@ input:focus,
 textarea:focus,
 select:focus{
 
-    outline:none;
+    outline:3px solid var(--sage-dark);
+
+    outline-offset:2px;
 
     border-color:var(--sage);
 
-    box-shadow:0 0 0 4px rgba(116,139,122,.12);
+}
+
+/*=========================================================
+Focus Visibility (WCAG 2.4.7 / 2.4.11)
+All interactive elements need a focus indicator that's
+visible against every background it can appear on and
+meets the 3:1 non-text contrast minimum. This one rule
+covers links, buttons, and any custom controls (accordion
+triggers, modal close buttons, etc.) sitewide.
+=========================================================*/
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible{
+
+    outline:3px solid var(--sage-dark);
+
+    outline-offset:3px;
+
+    border-radius:4px;
+
+}
+
+/* On dark/photo backgrounds the dark outline above won't
+   show up, so those sections get a light outline instead. */
+.hero *:focus-visible,
+.landscape-divider *:focus-visible,
+.cta-section *:focus-visible,
+.choose-card *:focus-visible{
+
+    outline-color:var(--white);
 
 }
 
