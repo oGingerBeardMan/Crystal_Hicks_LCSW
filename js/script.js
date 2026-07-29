@@ -226,10 +226,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const isOpen = currentCard.classList.contains("open");
 
             document.querySelectorAll(".service-detail-card.open").forEach(card => {
-                if (card !== currentCard) card.classList.remove("open");
+                if (card !== currentCard) {
+                    card.classList.remove("open");
+                    const otherToggle = card.querySelector(".service-toggle");
+                    if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
+                }
             });
 
             currentCard.classList.toggle("open");
+            toggle.setAttribute("aria-expanded", !isOpen ? "true" : "false");
 
             if (!isOpen) {
                 setTimeout(() => scrollToCard(currentCard), 100);
@@ -247,6 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetCard = document.querySelector(hash);
             if (targetCard && targetCard.classList.contains("service-detail-card")) {
                 targetCard.classList.add("open");
+                const targetToggle = targetCard.querySelector(".service-toggle");
+                if (targetToggle) targetToggle.setAttribute("aria-expanded", "true");
                 setTimeout(() => scrollToCard(targetCard), 200);
             }
         }
