@@ -17,23 +17,25 @@
 
 <body>
 
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- ========================================= -->
     <!-- HEADER -->
     <!-- ========================================= -->
     <header id="header">
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <a href="index.html" class="logo">
                 <span class="logo-name">Crystal Hicks</span>
                 <span class="logo-credentials">LCSW</span>
             </a>
 
-            <button class="mobile-toggle" aria-label="Toggle Navigation">
+            <button class="mobile-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <div class="nav-links">
+            <div class="nav-links" id="primary-nav-links">
                 <a href="index.html#about">About</a>
                 <a href="ways_we_can_work_together.html">Ways We Can Work Together</a>
                 <a href="index.html#focus">Areas of Focus</a>
@@ -46,6 +48,8 @@
             </a>
         </nav>
     </header>
+
+    <main id="main-content">
 
     <!-- ========================================= -->
     <!-- PAGE HERO -->
@@ -295,6 +299,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ========================================= -->
     <!-- FOOTER -->
     <!-- ========================================= -->
@@ -375,12 +381,12 @@
             <div class="pdf-actions">
                 <!-- Download Button -->
                 <a href="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" download="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" class="btn btn-outline btn-sm">
-                    📥 Download
+                    <span aria-hidden="true">📥</span> Download
                 </a>
                 
                 <!-- Print / Open Button -->
                 <a href="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" target="_blank" class="btn btn-primary btn-sm">
-                    🖨️ Print / Full View
+                    <span aria-hidden="true">🖨️</span> Print / Full View <span class="visually-hidden">(opens in a new tab)</span>
                 </a>
                 
                 <button type="button" class="modal-close" aria-label="Close modal" data-close-modal>&times;</button>
