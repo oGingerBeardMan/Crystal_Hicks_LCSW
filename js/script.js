@@ -82,9 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
             faqItems.forEach(other => {
                 if (other !== item) {
                     other.classList.remove("active");
+                    const otherQuestion = other.querySelector(".faq-question");
+                    if (otherQuestion) otherQuestion.setAttribute("aria-expanded", "false");
                 }
             });
             item.classList.toggle("active");
+            question.setAttribute("aria-expanded", item.classList.contains("active") ? "true" : "false");
         });
     });
 
@@ -187,12 +190,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (mobileToggle && navLinks) {
         mobileToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
+            const isOpen = navLinks.classList.toggle("active");
+            mobileToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
         });
 
         document.querySelectorAll(".nav-links a").forEach(link => {
             link.addEventListener("click", () => {
                 navLinks.classList.remove("active");
+                mobileToggle.setAttribute("aria-expanded", "false");
             });
         });
     }
