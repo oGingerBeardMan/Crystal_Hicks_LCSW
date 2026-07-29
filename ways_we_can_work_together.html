@@ -17,23 +17,25 @@
 
 <body>
 
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- ========================================= -->
     <!-- HEADER -->
     <!-- ========================================= -->
     <header id="header">
-        <nav class="navbar">
+        <nav class="navbar" aria-label="Primary">
             <a href="index.html" class="logo">
                 <span class="logo-name">Crystal Hicks</span>
                 <span class="logo-credentials">LCSW</span>
             </a>
 
-            <button class="mobile-toggle" aria-label="Toggle Navigation">
+            <button class="mobile-toggle" aria-label="Toggle Navigation" aria-expanded="false" aria-controls="primary-nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <div class="nav-links">
+            <div class="nav-links" id="primary-nav-links">
                 <a href="index.html#about">About</a>
                 <a href="ways_we_can_work_together.html" class="active">Ways We Can Work Together</a>
                 <a href="index.html#focus">Areas of Focus</a>
@@ -46,6 +48,8 @@
             </a>
         </nav>
     </header>
+
+    <main id="main-content">
 
     <!-- ========================================= -->
     <!-- PAGE HERO -->
@@ -170,7 +174,7 @@
 
                 <!-- 50 Minute -->
                 <article id="50-minute" class="service-detail-card">
-                    <button class="service-toggle" type="button">
+                    <button class="service-toggle" type="button" id="service-toggle-50" aria-expanded="false" aria-controls="service-expanded-50">
                         <div class="service-card-top">
                             <div class="service-icon" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -200,7 +204,7 @@
                         </div>
                     </button>
 
-                    <div class="service-expanded">
+                    <div class="service-expanded" id="service-expanded-50" role="region" aria-labelledby="service-toggle-50">
                         <section class="service-section">
                             <h3>A Consistent Space for Healing</h3>
                             <p>
@@ -342,7 +346,7 @@
 
                 <!-- 90 Minute Sessions -->
                 <article id="90-minute" class="service-detail-card">
-                    <button class="service-toggle" type="button">
+                    <button class="service-toggle" type="button" id="service-toggle-90" aria-expanded="false" aria-controls="service-expanded-90">
                         <div class="service-card-top">
                             <div class="service-icon" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -373,7 +377,7 @@
                         </div>
                     </button>
 
-                    <div class="service-expanded">
+                    <div class="service-expanded" id="service-expanded-90" role="region" aria-labelledby="service-toggle-90">
                         <section class="service-section">
                             <h3>More Time to Go Deeper</h3>
                             <p>
@@ -470,7 +474,7 @@
 
                 <!-- ONE-DAY INTENSIVE -->
                 <article id="one-day-intensive" class="service-detail-card">
-                    <button class="service-toggle" type="button">
+                    <button class="service-toggle" type="button" id="service-toggle-1day" aria-expanded="false" aria-controls="service-expanded-1day">
                         <div class="service-card-top">
                             <div class="service-icon" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -500,7 +504,7 @@
                         </div>
                     </button>
 
-                    <div class="service-expanded">
+                    <div class="service-expanded" id="service-expanded-1day" role="region" aria-labelledby="service-toggle-1day">
                         <section class="service-section">
                             <h3>Accelerated Healing in a Single Day</h3>
                             <p>
@@ -684,7 +688,7 @@
 
                 <!-- TWO-DAY INTENSIVE -->
                 <article id="two-day-intensive" class="service-detail-card">
-                    <button class="service-toggle" type="button">
+                    <button class="service-toggle" type="button" id="service-toggle-2day" aria-expanded="false" aria-controls="service-expanded-2day">
                         <div class="service-card-top">
                             <div class="service-icon" aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -714,7 +718,7 @@
                         </div>
                     </button>
 
-                    <div class="service-expanded">
+                    <div class="service-expanded" id="service-expanded-2day" role="region" aria-labelledby="service-toggle-2day">
                         <section class="service-section">
                             <h3>Deep, Immersive Transformation Across Two Days</h3>
                             <p>
@@ -924,6 +928,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ========================================= -->
     <!-- FOOTER -->
     <!-- ========================================= -->
@@ -1004,12 +1010,12 @@
             <div class="pdf-actions">
                 <!-- Download Button -->
                 <a href="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" download="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" class="btn btn-outline btn-sm">
-                    📥 Download
+                    <span aria-hidden="true">📥</span> Download
                 </a>
                 
                 <!-- Print / Open Button -->
                 <a href="Living-Water-Womens-Counseling-LLC-Notice-of-Privacy-Practices.pdf" target="_blank" class="btn btn-primary btn-sm">
-                    🖨️ Print / Full View
+                    <span aria-hidden="true">🖨️</span> Print / Full View <span class="visually-hidden">(opens in a new tab)</span>
                 </a>
                 
                 <button type="button" class="modal-close" aria-label="Close modal" data-close-modal>&times;</button>
