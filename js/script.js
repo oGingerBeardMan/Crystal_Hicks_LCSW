@@ -74,20 +74,59 @@ document.addEventListener("DOMContentLoaded", () => {
     =========================================*/
     const faqItems = document.querySelectorAll(".faq-item");
 
+    // Panels are visually clipped via max-height, but that alone still
+    // leaves the collapsed answer readable by screen readers. Toggling
+    // `hidden` fixes that — delayed on close so the CSS transition
+    // (.45s) gets to play out first instead of the content vanishing
+    // mid-animation.
+    function showFaqAnswer(answer) {
+        if (answer._hideTimeout) {
+            clearTimeout(answer._hideTimeout);
+            answer._hideTimeout = null;
+        }
+        answer.hidden = false;
+        // Force a reflow so the browser registers the un-hidden
+        // (display:block) state before the max-height transition below
+        // is triggered — otherwise there's nothing to animate from and
+        // it just snaps open instead of sliding.
+        void answer.offsetHeight;
+    }
+
+    function hideFaqAnswer(answer) {
+        answer._hideTimeout = setTimeout(() => {
+            answer.hidden = true;
+            answer._hideTimeout = null;
+        }, 460);
+    }
+
     faqItems.forEach(item => {
         const question = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
         if (!question) return;
 
         question.addEventListener("click", () => {
+            const isOpen = item.classList.contains("active");
+
             faqItems.forEach(other => {
                 if (other !== item) {
                     other.classList.remove("active");
                     const otherQuestion = other.querySelector(".faq-question");
+                    const otherAnswer = other.querySelector(".faq-answer");
                     if (otherQuestion) otherQuestion.setAttribute("aria-expanded", "false");
+                    if (otherAnswer) hideFaqAnswer(otherAnswer);
                 }
             });
+
+            if (answer && !isOpen) showFaqAnswer(answer);
+
             item.classList.toggle("active");
-            question.setAttribute("aria-expanded", item.classList.contains("active") ? "true" : "false");
+            question.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+
+            if (answer) {
+                if (isOpen) {
+                    hideFaqAnswer(answer);
+                }
+            }
         });
     });
 
@@ -266,53 +305,100 @@ document.addEventListener("DOMContentLoaded", () => {
 /*=========================================
       Modal Controller (GFE & Privacy Policy)
     =========================================*/
+    let lastFocusedElement = null;
+    let modalKeydownHandler = null;
+
+    function getFocusableElements(container) {
+        return Array.from(
+            container.querySelectorAll(
+                'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])'
+            )
+        ).filter(el => el.offsetParent !== null);
+    }
+
+    function openModal(modal, triggerElement) {
+        if (!modal) return;
+
+        lastFocusedElement = triggerElement || document.activeElement;
+
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+
+        const container = modal.querySelector(".modal-container");
+        const focusable = container ? getFocusableElements(container) : [];
+        const closeBtn = modal.querySelector(".modal-close");
+
+        (closeBtn || focusable[0])?.focus();
+
+        // Trap Tab/Shift+Tab so focus can't leave the modal while it's open
+        modalKeydownHandler = e => {
+            if (e.key !== "Tab" || focusable.length === 0) return;
+
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        };
+        modal.addEventListener("keydown", modalKeydownHandler);
+    }
+
+    function closeModal(modal) {
+        if (!modal) return;
+
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+
+        if (modalKeydownHandler) {
+            modal.removeEventListener("keydown", modalKeydownHandler);
+            modalKeydownHandler = null;
+        }
+
+        if (!document.querySelector(".modal.active")) {
+            document.body.style.overflow = "";
+        }
+
+        // Send focus back to whatever opened the modal, so keyboard
+        // users land back where they were instead of at the top of the page
+        if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+            lastFocusedElement.focus();
+        }
+        lastFocusedElement = null;
+    }
+
     document.addEventListener("click", e => {
         // 1. Open GFE Modal
         const gfeTrigger = e.target.closest(".gfe-trigger, a[href='#gfe-modal']");
         if (gfeTrigger) {
             e.preventDefault();
-            const modal = document.getElementById("gfe-modal");
-            if (modal) {
-                modal.classList.add("active");
-                modal.setAttribute("aria-hidden", "false");
-                document.body.style.overflow = "hidden";
-            }
+            openModal(document.getElementById("gfe-modal"), gfeTrigger);
         }
 
         // 2. Open Privacy Policy Modal
         const privacyTrigger = e.target.closest(".privacy-trigger, a[href='#privacy-modal']");
         if (privacyTrigger) {
             e.preventDefault();
-            const modal = document.getElementById("privacy-modal");
-            if (modal) {
-                modal.classList.add("active");
-                modal.setAttribute("aria-hidden", "false");
-                document.body.style.overflow = "hidden";
-            }
+            openModal(document.getElementById("privacy-modal"), privacyTrigger);
         }
 
         // 3. Close Any Active Modal (Overlay click or Close button)
         if (e.target.closest("[data-close-modal]")) {
-            const activeModals = document.querySelectorAll(".modal.active");
-            activeModals.forEach(modal => {
-                modal.classList.remove("active");
-                modal.setAttribute("aria-hidden", "true");
-            });
-            document.body.style.overflow = "";
+            const activeModal = e.target.closest(".modal.active") || document.querySelector(".modal.active");
+            closeModal(activeModal);
         }
     });
 
     // 4. Close Active Modal on Escape Key
     document.addEventListener("keydown", e => {
         if (e.key === "Escape") {
-            const activeModals = document.querySelectorAll(".modal.active");
-            if (activeModals.length > 0) {
-                activeModals.forEach(modal => {
-                    modal.classList.remove("active");
-                    modal.setAttribute("aria-hidden", "true");
-                });
-                document.body.style.overflow = "";
-            }
+            const activeModal = document.querySelector(".modal.active");
+            if (activeModal) closeModal(activeModal);
         }
     });
 
