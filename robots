@@ -1,0 +1,13 @@
+# ============================================
+# robots.txt — DEV / GitHub Pages copy ONLY
+# Do not deploy this file to the production domain.
+#
+# This blocks every crawler, including AI search/training bots,
+# because this is a pre-launch development URL, not the real site.
+# The permissive robots.txt (allowing GPTBot, ClaudeBot,
+# PerplexityBot, Google-Extended, etc.) is a separate file — use
+# that one instead when deploying to livingwaterwomenscounseling.com.
+# ============================================
+
+User-agent: *
+Disallow: /
