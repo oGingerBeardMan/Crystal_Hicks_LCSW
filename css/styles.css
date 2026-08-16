@@ -487,9 +487,11 @@ Hero
 }
 
 .nav-logo-img {
-    height: 75px; /* Constrains logo height to fit nicely in navbar */
-    width: auto;  /* Maintains correct proportions */
+    height: 75px;        /* Increased height to 75px */
+    width: auto;         /* Keeps proper aspect ratio */
+    border-radius: 12px; /* Smooth rounded corners (adjust to 50% for a circle) */
     display: block;
+    object-fit: cover;   /* Ensures image fills smoothly if explicit width/height are set */
 }
 
 .logo-text-block {
