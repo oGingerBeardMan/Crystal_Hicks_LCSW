@@ -479,6 +479,39 @@ width:100%;
 Hero
 =========================================================*/
 
+.logo-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-text-block {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.logo-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-dark, #2C3E35);
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted, #6B7C73);
+}
+
+.logo-owner {
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 2px;
+    color: var(--primary-color, #4A6B5D);
+}
+
 .hero{
 
 padding-top:180px;
